@@ -51,9 +51,7 @@ class Server{
                 if(msg.equals("Exit"))
                 {
                     System.out.println("Client is Terminated from chat");
-
                     socket.close();
-                    
                     break;
                 }
                 System.out.println("Client: " +msg);
@@ -61,7 +59,8 @@ class Server{
             }
 
         } catch(Exception e){
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Server Read Connection closed");
         }
 
         };
@@ -81,15 +80,21 @@ class Server{
             System.out.println("Writer Started.....");
 
             try{
-            while (true) {
+            while (true && !socket.isClosed()) {
                     BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
                     String content = br1.readLine();
                     out.println(content);
                     out.flush();
+
+                    if(content.equals("Exit")){
+                        socket.close();
+                        break;
+                    }
                 
             }
         }catch(Exception e){
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Server Write Connection closed");
         }
 
         };
