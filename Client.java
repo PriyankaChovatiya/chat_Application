@@ -25,7 +25,7 @@ public class Client {
          StartWriting();
 
     } catch (Exception e) {
-        // TODO: handle exception
+        e.printStackTrace();
        
     }
    }
@@ -38,8 +38,9 @@ public class Client {
     Runnable r1= () ->{
         System.out.println("Reader Started....");
 
+        try{
         while (true) {
-            try{
+         
                 String msg = br.readLine();
           
             if(msg.equals("Exit"))
@@ -48,11 +49,12 @@ public class Client {
                 break;
             }
             System.out.println("Server: " + msg);
-              } catch(Exception e){
-                e.printStackTrace();
-        }
+              
             
         }
+    } catch(Exception e){
+        e.printStackTrace();
+    }
 
     };
 
@@ -70,21 +72,18 @@ public void StartWriting(){
 
         System.out.println("Writer Started.....");
 
+        try{
         while (true) {
-            try {
-
+           
                 BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
                 String content = br1.readLine();
                 out.println(content);
                 out.flush();
-
-                
-            } catch (Exception e) {
-                // TODO: handle exception
-                e.printStackTrace();
-            }
             
-        }
+        } 
+    } catch(Exception e){
+        e.printStackTrace();
+    }
 
     };
 
@@ -94,7 +93,6 @@ public void StartWriting(){
 public static void main(String[] args) {
     System.out.println("Client is running...");
     new Client();
-
 }
 
 }

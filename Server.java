@@ -43,8 +43,9 @@ class Server{
         Runnable r1= () ->{
             System.out.println("Reader Started....");
 
+            try{
             while (true) {
-                try{
+
                     String msg = br.readLine();
               
                 if(msg.equals("Exit"))
@@ -56,11 +57,12 @@ class Server{
                     break;
                 }
                 System.out.println("Client: " +msg);
-                  } catch(Exception e){
-                    e.printStackTrace();
+                  
             }
-                
-            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
         };
 
@@ -78,21 +80,17 @@ class Server{
 
             System.out.println("Writer Started.....");
 
+            try{
             while (true) {
-                try {
-
                     BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
                     String content = br1.readLine();
                     out.println(content);
                     out.flush();
-
-                    
-                } catch (Exception e) {
-                    // TODO: handle exception
-                    e.printStackTrace();
-                }
                 
             }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         };
 
