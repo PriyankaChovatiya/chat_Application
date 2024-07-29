@@ -1,5 +1,4 @@
 import java.net.*;
-
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -95,13 +94,6 @@ private void createGUI(){
 
 
 
-
-
-
-
-
-
-
 private void handleEvent(){
      s_MessageInput.addKeyListener(new KeyListener() {
 
@@ -153,7 +145,7 @@ private void handleEvent(){
                     socket.close();
                     break;
                 }
-                s_MessageArea.append("Server: " + msg + "\n");
+                s_MessageArea.append("Client: " + msg + "\n");
                   
             }
 
