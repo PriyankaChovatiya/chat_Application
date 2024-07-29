@@ -1,7 +1,5 @@
 import java.net.*;
-
 import javax.swing.*;
-
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -52,7 +50,7 @@ private void createGUI(){
 
     //gui
     this.setTitle("Client Messager(END)");
-    this.setSize(600, 600);
+    this.setSize(600, 800);
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -74,12 +72,16 @@ private void createGUI(){
         heading.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
         // heading.setBackground(Color.decode("#2F4F7F"));
 
+        //For message Aera
+        MessageArea.setEditable(false);
+
      //Frame Layout 
     this.setLayout(new BorderLayout());
 
     //Adding component to thte frame 
     this.add(heading,BorderLayout.NORTH);
-    this.add(MessageArea,BorderLayout.CENTER);
+    JScrollPane jScrollPane = new JScrollPane(MessageArea);
+    this.add(jScrollPane,BorderLayout.CENTER);
     this.add(MessageInput,BorderLayout.SOUTH);
 
     this.setVisible(true);
@@ -105,7 +107,7 @@ private void handleEvent(){
         public void keyReleased(KeyEvent e) {
             // TODO Auto-generated method stub
         //    System.out.println("Key released "+e.getKeyCode());
-             
+        if(e.getKeyCode() ==10)     {
         String ContentToSend = MessageInput.getText();
         MessageArea.append("Me :" + ContentToSend + "\n");
         out.println(ContentToSend);
@@ -113,7 +115,7 @@ private void handleEvent(){
         MessageInput.setText("");
         MessageInput.requestFocus();
         }
-        
+       }
      });
 }
 
@@ -129,7 +131,7 @@ private void handleEvent(){
          
                 String msg = br.readLine();
           
-            if(msg.equals("Exit"))
+            if(msg.equals("exit"))
             {
                 System.out.println("Server is Terminated from chat");
                 JOptionPane.showMessageDialog(this, "Server Terminated the chat ");
@@ -168,7 +170,7 @@ public void StartWriting(){
                 out.println(content);
                 out.flush();
 
-                if(content.equals("Exit")){
+                if(content.equals("exit")){
                     socket.close();
                     break;
                 }
